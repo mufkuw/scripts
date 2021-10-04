@@ -1,7 +1,9 @@
 #!/bin/sh
 
-echo "Enter domain name without www or http : "
-read -p WEBSITE
+#echo "Enter domain name without www or http : "
+#read -p WEBSITE
+
+
 
 #Installing LAMP
 wget -O - https://raw.githubusercontent.com/mufkuw/scripts/main/install_lamp | bash
@@ -47,7 +49,7 @@ Define PS_ROOT /var/www/ps
 Define PS_HTML \${PS_ROOT}/html
 Define PS_LOG \${PS_ROOT}/log
 Define PS_CERT \${PS_ROOT}/cert
-Define PS_SERVER $WEBSITE
+Define PS_SERVER yoursite.com
 <VirtualHost *:80>
         ServerAdmin webmaster@localhost
         ServerName \${PS_SERVER}
