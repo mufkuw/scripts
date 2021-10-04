@@ -6,8 +6,6 @@
 #Installing LAMP
 wget -O - https://raw.githubusercontent.com/mufkuw/scripts/main/install_lamp | bash
 
-mysql -e  "CREATE DATABASE ps;"
-
 #mysql_installation
 apt -y install expect
 #Not required in actual script
@@ -39,6 +37,12 @@ mkdir /var/www/ps/db >> /dev/null
 mkdir /var/www/ps/cert >> /dev/null
 mkdir /var/www/ps/log >> /dev/null
 mkdir /var/www/ps/html >> /dev/null
+
+#echo transfering data to single folder version
+mysql -e  "CREATE DATABASE ps;"
+
+mv /var/lib/mysql/ps /var/www/db/
+ln -s /var/www/db/ps /var/lib/mysql/ps
 
 echo "
 Define PS_ROOT /var/www/ps
