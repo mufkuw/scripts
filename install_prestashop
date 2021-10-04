@@ -1,4 +1,28 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-apt update -y
-apt upgrade -y
+echo -e "\n\nUpdating Apt Packages and upgrading latest patches..\n"
+apt-get update -y && sudo apt-get upgrade -y
+
+echo -e "\n\nInstalling Apache2 Web server\n"
+apt-get install apache2 -y
+
+echo -e "\n\nInstalling PHP & Requirements\n"
+apt-get install php -y
+
+echo -e "\n\nInstalling MySQL\n"
+apt-get install mariadb-server -y
+
+echo -e "\n\nPermissions for /var/www\n"
+chown -R www-data:www-data /var/www
+echo -e "\n\nPermissions have been set\n"
+
+echo -e "\n\nEnabling Modules\n"
+a2enmod rewrite
+phpenmod mcrypt
+
+echo -e "\n\nRestarting Apache\n"
+service apache2 restart
+
+echo -e "\n\nLAMP Installation Completed"
+
+exit 0
