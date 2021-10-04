@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo -e "\n\nUpdating Apt Packages and upgrading latest patches..\n"
+apt-get update -y && sudo apt-get upgrade -y
+
+echo -e "\n\nInstalling LAMP\n"
+apt-get install apache2 php mariadb-server php-mysql -y
