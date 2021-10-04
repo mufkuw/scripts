@@ -4,7 +4,7 @@ echo "Enter domain name without www or http"
 read WEBSITE
 
 #Installing LAMP
-wget -O - https://raw.githubusercontent.com/mufkuw/scripts/main/install_lamp?token=AB3DLHMAVPJGXWOJ5UCPWSDBLLB6Q | bash
+wget -O - https://raw.githubusercontent.com/mufkuw/scripts/main/install_lamp | bash
 
 mkdir /var/www/ps >> /dev/null
 mkdir /var/www/ps/a2 >> /dev/null
