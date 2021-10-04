@@ -3,73 +3,13 @@
 #echo "Enter domain name without www or http : "
 #read -p WEBSITE
 
-
-
 #Installing LAMP
 wget -O - https://raw.githubusercontent.com/mufkuw/scripts/main/install_lamp | bash
 
 mysql -e  "CREATE DATABASE ps;"
 
 #mysql_installation
-
 apt -y install expect
-
-#Not required in actual script
-#MYSQL_ROOT_PASSWORD=
-
-SECURE_MYSQL=$(expect -c "
-set timeout 10
-spawn mysql_secure_installation
-expect \"Enter current password for root (enter for none):\"
-send \"$MYSQL\r\"
-expect \"Change the root password?\"
-send \"n\r\"
-expect \"Remove anonymous users?\"
-send \"y\r\"
-expect \"Disallow root login remotely?\"
-send \"y\r\"
-expect \"Remove test database and access to it?\"
-send \"y\r\"
-expect \"Reload privilege tables now?\"
-send \"y\r\"
-expect eof
-")
-
-echo "$SECURE_MYSQL"
-
-mkdir /var/www/ps >> /dev/null
-mkdir /var/www/ps/a2 >> /dev/null
-mkdir /var/www/ps/db >> /dev/null
-mkdir /var/www/ps/cert >> /dev/null
-mkdir /var/www/ps/log >> /dev/null
-mkdir /var/www/ps/html >> /dev/null
-
-echo "
-Define PS_ROOT /var/www/ps
-Define PS_HTML \${PS_ROOT}/html
-Define PS_LOG \${PS_ROOT}/log
-Define PS_CERT \${PS_ROOT}/cert
-Define PS_SERVER yoursite.com
-<VirtualHost *:80>
-        ServerAdmin webmaster@localhost
-        ServerName \${PS_SERVER}
-
-
-root@test:~# cat c
-#!/bin/sh
-
-echo "Enter domain name without www or http : "
-read -p WEBSITE
-
-#Installing LAMP
-wget -O - https://raw.githubusercontent.com/mufkuw/scripts/main/install_lamp?token=AB3DLHKSDJR2QQ7OHHMEEP3BLLDII | bash
-
-mysql -e  "CREATE DATABASE ps;"
-
-#mysql_installation
-
-apt -y install expect
-
 #Not required in actual script
 #MYSQL_ROOT_PASSWORD=
 
