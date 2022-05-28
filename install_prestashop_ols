@@ -12,7 +12,7 @@ mkdir /var/www/ps/html >> /dev/null
 #echo transfering data to single folder version
 mysql -e  "CREATE DATABASE ps;"
 
-mv /var/lib/mysql/ps /var/www/db/
+mv /var/lib/mysql/ps /var/www/ps/db/
 ln -s /var/www/db/ps /var/lib/mysql/ps
 ln -s /var/www/ps/html $HOME/ps
 
