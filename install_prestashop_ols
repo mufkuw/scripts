@@ -2,6 +2,7 @@
 
 wget -O - https://raw.githubusercontent.com/mufkuw/scripts/main/install_ols | bash
 
+mkdir /var/www >> /dev/null
 mkdir /var/www/ps >> /dev/null
 mkdir /var/www/ps/a2 >> /dev/null
 mkdir /var/www/ps/db >> /dev/null
