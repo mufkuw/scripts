@@ -1,1 +1,8 @@
+#!/bin/bash
 
+echo -e "\n\nUpdating Apt Packages and upgrading latest patches..\n"
+apt-get update -y && sudo apt-get upgrade -y
+
+echo -e "\n\nInstalling OLS\n"
+wget -O - http://rpms.litespeedtech.com/debian/enable_lst_debian_repo.sh | bash
+apt-get install openlitespeed mariadb-server -y
