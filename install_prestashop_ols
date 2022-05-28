@@ -1,0 +1,50 @@
+#!/bin/sh
+
+#echo "Enter domain name without www or http : "
+#read -p WEBSITE
+
+#Installing LAMP
+wget -O - https://raw.githubusercontent.com/mufkuw/scripts/main/install_ols | bash
+
+#mysql_installation
+apt -y install expect
+#Not required in actual script
+#MYSQL_ROOT_PASSWORD=
+
+SECURE_MYSQL=$(expect -c "
+set timeout 10
+spawn mysql_secure_installation
+expect \"Enter current password for root (enter for none):\"
+send \"$MYSQL\r\"
+expect \"Change the root password?\"
+send \"n\r\"
+expect \"Remove anonymous users?\"
+send \"y\r\"
+expect \"Disallow root login remotely?\"
+send \"y\r\"
+expect \"Remove test database and access to it?\"
+send \"y\r\"
+expect \"Reload privilege tables now?\"
+send \"y\r\"
+expect eof
+")
+
+#echo "$SECURE_MYSQL"
+
+mkdir /var/www/ps >> /dev/null
+mkdir /var/www/ps/a2 >> /dev/null
+mkdir /var/www/ps/db >> /dev/null
+mkdir /var/www/ps/cert >> /dev/null
+mkdir /var/www/ps/log >> /dev/null
+mkdir /var/www/ps/html >> /dev/null
+
+#echo transfering data to single folder version
+mysql -e  "CREATE DATABASE ps;"
+
+mv /var/lib/mysql/ps /var/www/db/
+ln -s /var/www/db/ps /var/lib/mysql/ps
+ln -s /var/www/ps/html $HOME/ps
+
+apt-get install unzip -y
+wget https://download.prestashop.com/download/releases/prestashop_1.7.8.6.zip
+unzip prestashop_1.7.8.6.zip -d $HOME/ps
