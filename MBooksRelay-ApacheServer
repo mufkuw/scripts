@@ -1,0 +1,50 @@
+<IfModule mod_ssl.c>
+        <VirtualHost _default_:18543>
+                ServerName terminals.hsquare.life
+                ServerAlias *.terminals.hsquare.life
+                ServerAdmin webmaster@localhost
+                ProxyPassInterpolateEnv On
+
+                DocumentRoot /var/www/html
+                ErrorLog ${APACHE_LOG_DIR}/error.log
+                CustomLog ${APACHE_LOG_DIR}/access.log combined
+                SSLEngine on
+                SSLCertificateFile      /var/www/cert/cert.pem 
+                SSLCertificateKeyFile   /var/www/cert/cert.pem.key
+
+                SSLEngine on
+                SSLProxyEngine On
+                SSLProxyVerify none
+                SSLProxyCheckPeerCN off
+                SSLProxyCheckPeerName off
+                SSLProxyCheckPeerExpire off
+
+                ProxyPreserveHost On
+                ProxyAddHeaders on
+
+                #RewriteCond "%{REMOTE_ADDR}" =50.12.95.78
+                #RewriteRule (.*) http://192.168.1.100/quote$1 [P,E=proxy_pass_path:/quote]
+                #RewriteRule (.*) http://192.168.1.100$1 [P]
+                #ProxyPassReverse / http://192.168.1.100${proxy_pass_path}/ interpolate
+
+                RewriteEngine     On
+                ProxyPassInterpolateEnv On
+                RewriteCond %{HTTP_HOST} ^t(\d+?)\.terminals\.hsquare\.life:18543$
+                RewriteRule ^(.*)$ https://127.0.0.1:58%1/$1 [P,E=proxy_pass_path:%1]
+                ProxyPassReverse / https://127.0.0.1:58${proxy_pass_path}/ interpolate
+
+
+
+                #ProxyPass / https://127.0.0.1:58001/
+                #ProxyPassReverse / https://127.0.0.1:58001/
+
+
+
+                <FilesMatch "\.(cgi|shtml|phtml|php)$">
+                                SSLOptions +StdEnvVars
+                </FilesMatch>
+                <Directory /usr/lib/cgi-bin>
+                        SSLOptions +StdEnvVars
+                </Directory>
+        </VirtualHost>
+</IfModule>
