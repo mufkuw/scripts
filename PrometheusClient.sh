@@ -2,6 +2,16 @@
 
 set -e
 
+# Function to clean up in case of failure
+cleanup() {
+  echo "Cleaning up downloaded files..."
+  rm -f node_exporter-*.tar.gz
+  rm -rf node_exporter-*.linux-amd64
+}
+
+# Trap to catch exit signal
+trap cleanup EXIT
+
 echo "Starting the script."
 
 # Checking for sudo
