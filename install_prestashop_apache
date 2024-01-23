@@ -95,5 +95,5 @@ Define PS_SERVER $WEBSITE
 ln -s /var/www/ps/html $HOME/ps
 
 apt-get install unzip -y
-wget https://download.prestashop.com/download/releases/prestashop_1.7.7.8.zip
-unzip prestashop_1.7.7.8.zip -d $HOME/ps
+wget https://github.com/PrestaShop/PrestaShop/releases/download/8.1.3/prestashop_8.1.3.zip
+unzip prestashop_8.1.3.zip -d $HOME/ps
