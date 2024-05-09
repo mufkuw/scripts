@@ -28,7 +28,7 @@ def process_images(input_dir, output_dir, server_url):
     for filename in os.listdir(input_dir):
         if filename.lower().endswith(('.png', '.jpg', '.jpeg')):
             input_path = os.path.join(input_dir, filename)
-            output_path = os.path.join(output_dir, f"{os.path.splitext(filename)[0]}_final.png")
+            output_path = os.path.join(output_dir, f"{os.path.splitext(filename)[0]}.png")
             
             print(f"Processing {filename}")
             try:
